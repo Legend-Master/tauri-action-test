@@ -27,7 +27,7 @@ jobs:
 
       - name: Tauri Build
         id: tauri-build
-        uses: tauri-apps/tauri-action@v0
+        uses: Legend-Master/tauri-action@fix-space-in-name-updater
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: dW50cnVzdGVkIGNvbW1lbnQ6IHJzaWduIGVuY3J5cHRlZCBzZWNyZXQga2V5ClJXUlRZMEl5WENlNXYrOWhOblBQMUFIQlRqL05OTGt1L2ZmQUJ5TlZFbkJKRFFjdzhmTUFBQkFBQUFBQUFBQUFBQUlBQUFBQWxtTys3K3RmYkxuYUJ4c1pQTFY2ZjBTbEpZRVYxNXlhTzMyMEhhOHdDL2NaNnRzTlcvMFZlbHd0UEZMd3YwM1RoNWk1S2VQOWJMUTFUVHZ5aFVHRFM1bU9iNlQyQ1ZzZFJtTDF1TUwwVmE0REU3ZUV1eDh0dStjaHhXVVNWSzVzd3NENHhMSmFJcEk9Cg==
