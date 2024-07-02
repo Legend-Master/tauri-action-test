@@ -1,0 +1,39 @@
+name: Build Release
+
+on:
+  release:
+    types: released
+
+jobs:
+  release:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Tauri Build
+        id: tauri-build
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: dW50cnVzdGVkIGNvbW1lbnQ6IHJzaWduIGVuY3J5cHRlZCBzZWNyZXQga2V5ClJXUlRZMEl5WENlNXYrOWhOblBQMUFIQlRqL05OTGt1L2ZmQUJ5TlZFbkJKRFFjdzhmTUFBQkFBQUFBQUFBQUFBQUlBQUFBQWxtTys3K3RmYkxuYUJ4c1pQTFY2ZjBTbEpZRVYxNXlhTzMyMEhhOHdDL2NaNnRzTlcvMFZlbHd0UEZMd3YwM1RoNWk1S2VQOWJMUTFUVHZ5aFVHRFM1bU9iNlQyQ1ZzZFJtTDF1TUwwVmE0REU3ZUV1eDh0dStjaHhXVVNWSzVzd3NENHhMSmFJcEk9Cg==
+          CARGO_TERM_COLOR: always
+          CARGO_INCREMENTAL: 0
+        with:
+          tagName: ${{ github.ref }}
+          releaseName: 'Test'
+          releaseBody: ${{ github.event.release.body }}
